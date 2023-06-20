@@ -48,8 +48,14 @@ $('#form-editar-tenis').submit(function (event) {
             location.href = 'listar-tenis.html';
         },
         error: function (data) {
+            esconderAlert(); // Ocultar mensagem anterior, se houver
             $('#div-alert-message').prepend(data.responseText);
             $('#div-alert-message').fadeIn();
+        
+            // Ocultar a mensagem após 3 segundos
+            setTimeout(function () {
+                $('#div-alert-message').fadeOut();
+            }, 3000);
         }
     });
 });
@@ -57,6 +63,7 @@ $('#form-editar-tenis').submit(function (event) {
 function esconderAlert() {
     $('#div-alert-message').html("<a class='close' onclick='esconderAlert()'>×</a>");
     $('#div-alert-message').hide();
+
 }
 
 function formatDate(date) {

@@ -33,8 +33,19 @@ $('#form-inserir-tenis').submit(function (event) {
             location.href = 'listar-tenis.html';
         },
         error: function (data) {
+            esconderAlert(); // Ocultar mensagem anterior, se houver
             $('#div-alert-message').prepend(data.responseText);
             $('#div-alert-message').fadeIn();
+        
+            // Ocultar a mensagem após 3 segundos
+            setTimeout(function () {
+                $('#div-alert-message').fadeOut();
+            }, 3000);
         }
     });
 });
+
+function esconderAlert() {
+    $('#div-alert-message').html("<a class='close' onclick='esconderAlert()'>×</a>");
+    $('#div-alert-message').hide();
+}
